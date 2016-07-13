@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 
 class Button extends Component{
-  
+
   render(){
     return(
       <TouchableHighlight style={styles.button} onPress={this.props.onClick}>
@@ -16,7 +16,7 @@ class Button extends Component{
       </TouchableHighlight>
     );
   }
-  
+
 }
 
 const styles = StyleSheet.create({
