@@ -15,6 +15,7 @@ const initialState = {
 
 
 export default function(state = initialState, action){
+
   switch(action.type){
     case 'ADD_TODO':
       {
@@ -29,18 +30,18 @@ export default function(state = initialState, action){
     case 'TOGGLE_TODO':
       {
         let todo = state.todoList[action.index];
-        
+
         let newTodo = {
           text: todo.text,
           status: !todo.status
         }
 
         let newTodoList = state.todoList.slice(0);
-        
+
         newTodoList[action.index] = newTodo;
-        
+
         state = Object.assign({...state}, {todoList: newTodoList});
-        
+
         return state;
       }
 

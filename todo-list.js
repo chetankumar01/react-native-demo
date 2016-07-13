@@ -12,19 +12,21 @@ import {
 import TextLabel from './text-label';
 import Button from './button';
 import Checkbox from './checkbox';
+import AddToDo from './todo-add';
 
 import {connect} from 'react-redux';
 
 class TODOList extends Component {
   navigateToAddTodo = () => {
     this.props.navigator.push({
+      component: AddToDo,
     });
   }
 
   toggleTodo = (index) => {
     this.props.toggleTodo(index);
   }
-  
+
   render(){
     return(
       <View style={styles.flexCenter}>
