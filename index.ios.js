@@ -1,8 +1,10 @@
+'use strict';
+
 import React, { Component } from 'react';
 import {
   AppRegistry,
 } from 'react-native';
 
-import App from './app';
+import TodoApp from './todoApp';
 
-AppRegistry.registerComponent('DemoProject', () => App);
+AppRegistry.registerComponent('DemoProject', () => TodoApp);

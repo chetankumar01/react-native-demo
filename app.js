@@ -5,8 +5,7 @@ import {
 } from 'react-native';
 
 
-import Home from './home';
-import NotHome from './not-home';
+import TodoList from './todo-list';
 
 class App extends Component {
 
@@ -21,8 +20,7 @@ class App extends Component {
           ref='navigator'
           renderScene={this.renderScene.bind(this)}
           initialRoute={{
-                        component: Home,
-                        name: 'Home',
+                        component: TodoList
                         }}
       />
     )
