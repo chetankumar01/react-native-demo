@@ -14,33 +14,32 @@ import {connect} from 'react-redux';
 
 import {toJS} from 'immutable';
 
-import TodoListUI from './todo-list-ui';
+  import TodoCommentListUI from './todo-comment-ui';
 
 class TODOList extends Component {
   constructor(){
     super();
     this.state = {
+      comment : ''
       dataSource: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2,
       }),
     };
   }
 
-  navigateToAddTodo = () => {
-    this.props.navigator.push({
-      component: AddToDo,
-    });
+  navigateToTodoList = () => {
+    this.props.addTodoComment({todo: this.todoText, comment: this.state.comment});
+    this.props.navigator.pop();
   }
 
   render(){
-    const dataSource = this.state.dataSource.cloneWithRows(this.props.todoList.toJS());
+    const dataSource = this.state.dataSource.cloneWithRows(this.props.commentList.toJS());
     return(
       <View>
 
-      <TodoListUI
+      <TodoCommentListUI
           dataSource = {dataSource}
-          toggleTodo = {this.props.toggleTodo}
-          navigateToAddTodo = {this.navigateToAddTodo}
+          navigateToAddTodo = {this.navigateToTodo}
       />
       </View>
     )
@@ -49,7 +48,7 @@ class TODOList extends Component {
 
 function mapStateToProps(state){
   return {
-    todoList: state.todoReducer.get('todoList')
+    todoList: state.todoReducer.get('commentList')
   }
 }
 
@@ -57,8 +56,9 @@ function mapDispatchToProps(dispatch){
   return {
     toggleTodo: (index) => {
       dispatch({
-        type: 'TOGGLE_TODO',
-        index
+        type: 'ADD_COMMENT',
+        todo: this.state.comment
+        text : this.state.comment
       })
     }
   }
