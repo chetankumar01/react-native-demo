@@ -23,7 +23,9 @@ export default function(state = initialState, action){
           text: action.text,
           status: false
         };
-        state.todoList.push(newTodo);
+        let newTodoList = state.todoList.slice(0);
+        newTodoList.push(newTodo);
+        state = Object.assign({...state}, {todoList: newTodoList});
         return state;
       }
 
