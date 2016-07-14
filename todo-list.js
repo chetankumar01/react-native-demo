@@ -3,56 +3,49 @@
 import React, { Component } from 'react';
 
 import {
-  View,
-  Text,
-  StyleSheet,
+  ListView
 } from 'react-native';
 
 
-import TextLabel from './text-label';
-import Button from './button';
-import Checkbox from './checkbox';
 import AddToDo from './todo-add';
 
 import {connect} from 'react-redux';
 
+import {toJS} from 'immutable';
+
+import TodoListUI from './todo-list-ui';
+
 class TODOList extends Component {
+  constructor(){
+    super();
+    this.state = {
+      dataSource: new ListView.DataSource({
+        rowHasChanged: (row1, row2) => row1 !== row2,
+      }),
+    };
+  }
+  
   navigateToAddTodo = () => {
     this.props.navigator.push({
       component: AddToDo,
     });
   }
 
-  toggleTodo = (index) => {
-    this.props.toggleTodo(index);
-  }
-
   render(){
+    const dataSource = this.state.dataSource.cloneWithRows(this.props.todoList.toJS());
     return(
-      <View style={styles.flexCenter}>
-        <TextLabel label={'List of To dos'} color={'red'}/>
-
-        {this.props.todoList.map((todo, index) => {
-            return <Checkbox text={todo.text} onClick={this.toggleTodo.bind(this, index)} isChecked={todo.status} index={index} key={index}/>
-          })
-        }
-        <Button buttonText='Add to do' onClick={this.navigateToAddTodo} />
-      </View>
+      <TodoListUI
+          dataSource = {dataSource}
+          toggleTodo = {this.props.toggleTodo}
+          navigateToAddTodo = {this.navigateToAddTodo}
+      />
     )
   }
 }
 
-const styles = StyleSheet.create({
-  flexCenter: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-});
-
 function mapStateToProps(state){
   return {
-    todoList: state.todoReducer.todoList
+    todoList: state.todoReducer.get('todoList')
   }
 }
 

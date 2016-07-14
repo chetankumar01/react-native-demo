@@ -1,6 +1,8 @@
 'use strict';
 
-const initialState = {
+import {Map, List, fromJS} from 'immutable';
+
+const initialState = fromJS({
   todoList: [
     {
       text: 'get redux state to component',
@@ -11,7 +13,7 @@ const initialState = {
       status: false
     }
   ]
-}
+})
 
 
 export default function(state = initialState, action){
@@ -19,32 +21,25 @@ export default function(state = initialState, action){
   switch(action.type){
     case 'ADD_TODO':
       {
-        let newTodo = {
+        let newTodo = fromJS({
           text: action.text,
           status: false
-        };
-        let newTodoList = state.todoList.slice(0);
-        newTodoList.push(newTodo);
-        state = Object.assign({...state}, {todoList: newTodoList});
-        return state;
+        });
+        
+        let newTodoList = state.get('todoList').push(newTodo);
+
+        return state.set('todoList', newTodoList);
+
       }
 
     case 'TOGGLE_TODO':
       {
-        let todo = state.todoList[action.index];
-
-        let newTodo = {
-          text: todo.text,
-          status: !todo.status
-        }
-
-        let newTodoList = state.todoList.slice(0);
-
-        newTodoList[action.index] = newTodo;
-
-        state = Object.assign({...state}, {todoList: newTodoList});
-
-        return state;
+        let todo = state.get('todoList').get(action.index);
+        todo = todo.set('status', !todo.get('status'));
+        
+        let newTodoList = state.get('todoList').set(action.index, todo);
+        
+        return state.set('todoList', newTodoList);
       }
 
     default:

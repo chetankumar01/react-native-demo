@@ -15,13 +15,16 @@ import Button from './button';
 import {connect} from 'react-redux';
 
 class TODOAdd extends Component {
+
   navigateToTodoList = () => {
     this.props.navigator.pop();
   }
 
-  updateText = (text)=> {
-    this.props.addTodo({text: text});
+  addTodo = () => {
+    this.props.addTodo({text: this.todoText});
+    this.navigateToTodoList();
   }
+
 
   render(){
     return(
@@ -29,10 +32,11 @@ class TODOAdd extends Component {
         <TextLabel label={'Add new TODO'} color={'red'}/>
         <TextInput
             style={{width : 300, height: 50, borderColor: 'red', borderWidth: 1, alignItems:'center'}}
-            onEndEditing={(event) => this.updateText(event.nativeEvent.text)}
+            
+            onChangeText={(text) => this.todoText = text}
 
         />
-        <Button buttonText='Add' onClick={this.navigateToTodoList} />
+        <Button buttonText='Add' onClick={this.addTodo} />
       </View>
     )
   }
