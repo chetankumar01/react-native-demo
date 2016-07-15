@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+  //source = {require('./image/check/check.png')
+  import React, { Component } from 'react';
 import {
   View,
   Text,
@@ -13,19 +14,14 @@ class Checkbox extends Component{
   }
   render(){
     return (
-      <TouchableHighlight onPress={this.onClick.bind(this)}>
       <View style={customStyle.alignRow}>
-      {(this.props.isChecked == true) ?
-        <Image style = {customStyle.check}
-          //source = {require('./image/check/check.png')
-          />
-      :
-        <Image style = {customStyle.uncheck}/>
-      }
-      <Text>{this.props.text}</Text>
+        <TouchableHighlight onPress={this.onClick.bind(this)}>
+          {(this.props.isChecked == true) ? <Image style = {customStyle.check} /> : <Image style = {customStyle.uncheck}/> }
+        </TouchableHighlight>
+        <Text style={{marginLeft: 10}}>
+          {this.props.text}
+        </Text>
       </View>
-    </TouchableHighlight>
-
     )
   }
 }
@@ -37,19 +33,15 @@ const customStyle = StyleSheet.create({
       height:25,
       borderColor: 'red',
       borderWidth: 2,
-      marginRight :20,
-      marginBottom :20,
-
 
     },
     check:{
       width:25,
       height:25,
       backgroundColor: 'red',
-      marginRight :20,
-      marginBottom :20,
     },
     alignRow: {
+      margin: 5,
       flexDirection: 'row'
     }
 
