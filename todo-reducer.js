@@ -3,6 +3,7 @@
 import {Map, List, fromJS} from 'immutable';
 
 const initialState = fromJS({
+  selectedIndex : -1,
   todoList: [
     {
       text: 'get redux state to component',
@@ -19,13 +20,17 @@ const initialState = fromJS({
 export default function(state = initialState, action){
 
   switch(action.type){
+    case 'SELECT_TODO':{
+      return state.set('selectedIndex', action.index);
+    }
+
     case 'ADD_TODO':
       {
         let newTodo = fromJS({
           text: action.text,
           status: false
         });
-        
+
         let newTodoList = state.get('todoList').push(newTodo);
 
         return state.set('todoList', newTodoList);
@@ -36,9 +41,9 @@ export default function(state = initialState, action){
       {
         let todo = state.get('todoList').get(action.index);
         todo = todo.set('status', !todo.get('status'));
-        
+
         let newTodoList = state.get('todoList').set(action.index, todo);
-        
+
         return state.set('todoList', newTodoList);
       }
 

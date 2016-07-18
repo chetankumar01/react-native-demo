@@ -8,11 +8,11 @@ import {
 } from 'react-native';
 
 class Button extends Component{
-
+  
   render(){
     return(
       <TouchableHighlight style={styles.button} onPress={this.props.onClick}>
-        <Text>{this.props.buttonText}</Text>
+        <Text style = {{textAlign : 'center'}}>{this.props.buttonText}</Text>
       </TouchableHighlight>
     );
   }
@@ -21,10 +21,10 @@ class Button extends Component{
 
 const styles = StyleSheet.create({
   button: {
-    width: 100,
     backgroundColor: 'red',
     margin: 10,
-    padding: 10
+    padding: 10,
+    alignItems : 'center'
   }
 })
 

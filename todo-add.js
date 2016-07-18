@@ -5,12 +5,12 @@ import React, { Component } from 'react';
 import {
   View,
   Text,
-  TextInput,
   StyleSheet,
 } from 'react-native';
 
 import TextLabel from './text-label';
 import Button from './button';
+import TodoAddUI from './todo-add-ui';
 
 import {connect} from 'react-redux';
 
@@ -21,23 +21,17 @@ class TODOAdd extends Component {
   }
 
   addTodo = () => {
+    console.log('add to do');
     this.props.addTodo({text: this.todoText});
     this.navigateToTodoList();
   }
 
-
   render(){
     return(
-      <View style={styles.flexCenter}>
-        <TextLabel label={'Add new TODO'} color={'red'}/>
-        <TextInput
-            style={{width : 300, height: 50, borderColor: 'red', borderWidth: 1, alignItems:'center'}}
-            
-            onChangeText={(text) => this.todoText = text}
-
-        />
-        <Button buttonText='Add' onClick={this.addTodo} />
-      </View>
+      <TodoAddUI
+          addTodo = {this.addTodo}
+          navigateToTodoList = {this.navigateToTodoList}
+      />
     )
   }
 }

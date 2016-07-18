@@ -9,6 +9,7 @@ import {
 
 
 import AddToDo from './todo-add';
+import AddListComment from './todo-comments';
 
 import {connect} from 'react-redux';
 
@@ -32,17 +33,22 @@ class TODOList extends Component {
     });
   }
 
+  navigateToToDoDetail = (index) =>{
+    console.log('test record'+index);
+    this.props.navigator.push({
+      component: AddListComment,
+    });
+    }
+
   render(){
     const dataSource = this.state.dataSource.cloneWithRows(this.props.todoList.toJS());
     return(
-      <View>
-
       <TodoListUI
           dataSource = {dataSource}
           toggleTodo = {this.props.toggleTodo}
           navigateToAddTodo = {this.navigateToAddTodo}
+          navigateToToDoDetail = {this.navigateToToDoDetail}
       />
-      </View>
     )
   }
 }
@@ -58,6 +64,12 @@ function mapDispatchToProps(dispatch){
     toggleTodo: (index) => {
       dispatch({
         type: 'TOGGLE_TODO',
+        index
+      })
+    },
+    setTodoSelected: (index) => {
+      dispatch({
+        type: 'SELECT_TODO',
         index
       })
     }

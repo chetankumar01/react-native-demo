@@ -9,23 +9,26 @@ import Checkbox from './checkbox';
 
 export default function(props){
 
-  function renderTodo (todo, sectionId, rowId){
-    return  <TextLabel label={todo.text} color={'purple'}/>
-
+  function renderTodo (comment, sectionId, rowId){
+    return  <View style={{flexDirection: 'row', marginBottom:10}}>
+      <Text> {comment} </Text>
+      </View>
   }
 
   //render equivalent
   return(
     <View style={styles.flexCenter}>
       <View>
-        <TextLabel label={props.todo} color={'green'}/>
+        <TextLabel label={props.selectedIndex} color={'green'}/>
+        <Checkbox text={comment} onClick={props.toggleTodo} isChecked={todo.status} index={rowId}></Checkbox>
+
         <View style={{flex: 1}}>
           <ListView
               dataSource = {props.dataSource}
               renderRow = {renderTodo}
           />
         </View>
-        <Button buttonText='Add to do' onClick={props.navigateToTodoList} />
+        <Button buttonText='Add Comment' onClick={props.navigateToTodoList} />
       </View>
     </View>
   )

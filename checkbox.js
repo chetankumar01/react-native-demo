@@ -13,18 +13,13 @@ class Checkbox extends Component{
   }
   render(){
     return (
-      <TouchableHighlight onPress={this.onClick.bind(this)}>
       <View style={customStyle.alignRow}>
-      {(this.props.isChecked == true) ?
-        <Image style = {customStyle.check}
-          //source = {require('./image/check/check.png')
-          />
-      :
-        <Image style = {customStyle.uncheck}/>
+      <TouchableHighlight onPress={this.onClick.bind(this)} style={{marginRight : 10}}>
+      {(this.props.isChecked == true) ? <Image style = {customStyle.check} /> : <Image style = {customStyle.uncheck}/>
       }
-      <Text>{this.props.text}</Text>
-      </View>
     </TouchableHighlight>
+    <Text>{this.props.text}</Text>
+    </View>
 
     )
   }
@@ -37,23 +32,17 @@ const customStyle = StyleSheet.create({
       height:25,
       borderColor: 'red',
       borderWidth: 2,
-      marginRight :20,
-      marginBottom :20,
-
-
     },
     check:{
       width:25,
       height:25,
       backgroundColor: 'red',
-      marginRight :20,
-      marginBottom :20,
+      borderWidth: 2,
     },
     alignRow: {
-      flexDirection: 'row'
+      flexDirection: 'row',
+      marginRight : 20
     }
-
-
   })
 
   export default Checkbox;

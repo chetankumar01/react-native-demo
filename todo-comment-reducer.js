@@ -3,13 +3,13 @@
 import {Map, List, fromJS} from 'immutable';
 
 const initialState = fromJS({
-  todo : 'title'
   commentList: [
     {
-      text: 'Comment 1',
-    },
-    {
-      text: 'Comment 2',
+      index : 0,
+      comments: [
+        'render this guy',
+        'start adding comments'
+      ],
     }
   ]
 })
@@ -20,7 +20,7 @@ export default function(state = initialState, action){
   switch(action.type){
     case 'ADD_COMMENT':
       {
-        todo :action.
+        todo :action.text;
         let newComment = fromJS({
           text: action.text,
         });
