@@ -30,9 +30,22 @@ export default function(state = initialState, action){
           commentList = commentList.push(newCommentObj);
         }
         state = state.set('commentList', commentList)
-        console.log(state.toJS())
+        //console.log(state.toJS())
         return state;
       }
+
+      case 'DELETE_COMMENT':
+        {
+          let totalCommentList = state.get('commentList')
+          let commentList = totalCommentList.findEntry( (commentObj) => {return commentObj.get('index') === (action.todoIndex)});
+          let comments = commentList[1].get('comments');
+           comments = comments.delete(action.commentindex)
+          let updatedCommentObj = commentList[1].set('comments', comments);
+          totalCommentList = totalCommentList.set(commentList[0], updatedCommentObj)
+          state = state.set('commentList', totalCommentList)
+
+          return state;
+        }
 
     default:
       return state

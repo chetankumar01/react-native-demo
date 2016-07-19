@@ -29,13 +29,9 @@ class commentScreen extends Component {
     });
   }
 
-// .get('text')
   render(){
     let indexNo = this.props.route.indexNo
     let todoText = this.props.todoList.get(indexNo)
-    console.log(todoText.get('text'));
-    console.log(todoText.get('status'));
-    
     let commentObj = this.props.list.find( (commentObj) => {return commentObj.get('index') === (indexNo)});
     let list = commentObj.get('comments');
     const dataSource = this.state.dataSource.cloneWithRows(list.toJS())
@@ -47,7 +43,7 @@ class commentScreen extends Component {
         navigateToAddTodo = {this.navigateToAddTodo}
         addComment = {this.addComment}
         toggleTodo = {this.props.toggleTodo}
-
+        deleteComment = {this.props.deleteComment}
       />
     )
   }
@@ -73,6 +69,13 @@ function mapDispatchToProps(dispatch){
       dispatch({
         type: 'TOGGLE_TODO',
         index
+      })
+    },
+    deleteComment:(commentindex,todoIndex) => {
+      dispatch({
+        type:'DELETE_COMMENT',
+        commentindex,
+        todoIndex,
       })
     }
   }

@@ -41,6 +41,7 @@ class TODOList extends Component {
         toggleTodo = {this.props.toggleTodo}
         navigateToAddTodo = {this.navigateToAddTodo}
         comment = {this.comment}
+        commentList = {this.props.commentList}
         />
     )
   }
@@ -48,7 +49,8 @@ class TODOList extends Component {
 
 function mapStateToProps(state){
   return {
-    todoList: state.todoReducer.get('todoList')
+    todoList: state.todoReducer.get('todoList'),
+    commentList: state.commentReducer.get('commentList'),
   }
 }
 

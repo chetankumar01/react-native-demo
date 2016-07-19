@@ -15,12 +15,17 @@ export default function(props){
   }
 
   function renderTodo(todo, sectionId, rowId){
+    let commentObj = props.commentList.find( (commentObj) => {return commentObj.get('index') === parseInt(rowId)});
+    let list = commentObj.get('comments');
+
     return <View style={{  flexDirection: 'row'}}>
       <Checkbox text={todo.text} onClick={props.toggleTodo} isChecked={todo.status} index={rowId} />
       <Button
         buttonText='Comment' onClick={dummyComment.bind(this, rowId)}
         style={{  width:25, height:25,}}
          />
+         <TextLabel label= {list.size} color='yellow'/>
+
      </View>
   }
 

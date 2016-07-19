@@ -5,16 +5,20 @@ import {View, ListView, StyleSheet,TextInput} from 'react-native';
 import TextLabel from './text-label';
 import Button from './button';
 import Checkbox from './checkbox';
-
+import ButtonSmall from './button-small'
 
 export default function(props){
 
   let commentText = '';
 
+  function deleteComment(commentIndex,todoIndex){
+    props.deleteComment(Number(commentIndex),Number(todoIndex))
+  }
+
   function renderTodo(todo, sectionId, rowId){ //Listview UI
     return <View style={{ flexDirection: 'row'}} >
       <TextLabel label={todo}index={rowId} />
-      <Button  buttonText='X'  />
+      <ButtonSmall  buttonText='X' onClick = {deleteComment.bind(this,rowId,props.indexNo)} />
      </View>
     }
 
