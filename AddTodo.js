@@ -11,18 +11,14 @@ class AddTodo extends Component {
 render(){
     return(
       <AddTodoUI
-      navigateToAddTodo = {this.navigateToAddTodo}
-
+        addTodo = {this.addTodo}
       />
     )
   }
 
-  navigateToAddTodo = () => {
-    this.props.addTodo(props.todoText);
-    this.props.navigator.pop({
-      component:TODOList,
-      name:'TODOList'//identifire
-    });
+  addTodo = (text) => {
+    this.props.addTodo(text);
+    this.props.navigator.pop();
   }
 
 }

@@ -7,9 +7,10 @@ import {connect} from 'react-redux';
 
 import TodoListUI from './todo-list-ui';
 import AddTodo from './AddTodo';
-
+import commentScreen from './comment-screen'
 class TODOList extends Component {
   constructor(){
+
       super();
       this.state = {
         dataSource: new ListView.DataSource({
@@ -17,6 +18,14 @@ class TODOList extends Component {
         }),
       };
     }
+
+  comment = (index,commentText) => {
+    this.props.navigator.push({
+      component:commentScreen,
+      indexNo : index,
+      commentText:commentText
+    });
+  }
 
   navigateToAddTodo = () => {
     this.props.navigator.push({
@@ -32,6 +41,7 @@ class TODOList extends Component {
         dataSource = {dataSource}
         toggleTodo = {this.props.toggleTodo}
         navigateToAddTodo = {this.navigateToAddTodo}
+        comment = {this.comment}
         />
     )
   }

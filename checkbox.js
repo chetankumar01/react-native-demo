@@ -31,17 +31,17 @@ const customStyle = StyleSheet.create({
     uncheck:{
       width:25,
       height:25,
-      borderColor: 'red',
+      borderColor: 'blue',
       borderWidth: 2,
 
     },
     check:{
       width:25,
       height:25,
-      backgroundColor: 'red',
+      backgroundColor: 'blue',
     },
     alignRow: {
-      margin: 5,
+      margin: 10,
       flexDirection: 'row'
     }
 

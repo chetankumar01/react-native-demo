@@ -8,9 +8,20 @@ import Checkbox from './checkbox';
 
 
 export default function(props){
+  let indexNo = 0;
+
+  function dummyComment(index,commentText){
+    props.comment(Number(index),commentText)
+  }
 
   function renderTodo(todo, sectionId, rowId){
-    return <Checkbox text={todo.text} onClick={props.toggleTodo} isChecked={todo.status} index={rowId} />
+    return <View style={{  flexDirection: 'row'}}>
+      <Checkbox text={todo.text} onClick={props.toggleTodo} isChecked={todo.status} index={rowId} />
+      <Button
+        buttonText='Comment' onClick={dummyComment.bind(this, rowId,todo.text)}
+        style={{  width:25, height:25,}}
+         />
+     </View>
   }
 
   return(
@@ -29,6 +40,8 @@ export default function(props){
 
 const styles = StyleSheet.create({
   flexCenter: {
+    backgroundColor: 'skyblue',
+    marginTop:15,
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center'

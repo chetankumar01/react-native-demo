@@ -11,12 +11,19 @@ import {
 import Button from './button';
 
 export default function (props){
+
+  let todoText = '';
+
+  function addTodoDummy(){
+    props.addTodo(todoText)
+  }
+
   return(
-    <View style={styles.flexCenter}>
-    <TextInput style={styles.textInput}
-      onChangeText={(text) => this.todoText = ({text} )}
+    <View style={[styles.flexCenter]}>
+    <TextInput style={[styles.textInput]}
+      onChangeText={(text) => todoText = text}
     />
-    <Button buttonText='Submit' onClick={props.navigateToAddTodo} />
+    <Button buttonText='Submit' onClick={addTodoDummy} />
 
     </View>
   )
@@ -34,6 +41,5 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     width: 300,
     margin: 50,
-
   }
 });
