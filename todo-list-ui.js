@@ -10,15 +10,15 @@ import Checkbox from './checkbox';
 export default function(props){
   let indexNo = 0;
 
-  function dummyComment(index,commentText){
-    props.comment(Number(index),commentText)
+  function dummyComment(index){
+    props.comment(Number(index))
   }
 
   function renderTodo(todo, sectionId, rowId){
     return <View style={{  flexDirection: 'row'}}>
       <Checkbox text={todo.text} onClick={props.toggleTodo} isChecked={todo.status} index={rowId} />
       <Button
-        buttonText='Comment' onClick={dummyComment.bind(this, rowId,todo.text)}
+        buttonText='Comment' onClick={dummyComment.bind(this, rowId)}
         style={{  width:25, height:25,}}
          />
      </View>

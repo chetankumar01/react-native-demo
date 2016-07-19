@@ -4,14 +4,19 @@ import {View, ListView, StyleSheet,TextInput} from 'react-native';
 
 import TextLabel from './text-label';
 import Button from './button';
+import Checkbox from './checkbox';
 
 
 export default function(props){
+
   let commentText = '';
 
   function renderTodo(todo, sectionId, rowId){ //Listview UI
-    return  <TextLabel label={todo}index={rowId}  />
-  }
+    return <View style={{ flexDirection: 'row'}} >
+      <TextLabel label={todo}index={rowId} />
+      <Button  buttonText='X'  />
+     </View>
+    }
 
   function getCommentText(){
     props.addComment(commentText)
@@ -19,11 +24,12 @@ export default function(props){
 
   return(
     <View style={styles.flexCenter}>
-      <TextLabel label={props.heading}/>
-        <ListView 
-            dataSource = {props.dataSource}
-            renderRow = {renderTodo}
-        />
+      < Checkbox text={props.heading.get('text')} isChecked={props.heading.get('status')} onClick={props.toggleTodo} index={props.indexNo}  />
+
+      <ListView
+          dataSource = {props.dataSource}
+          renderRow = {renderTodo}
+      />
 
         <TextInput style={[styles.textInput]}
           onChangeText={(text) => commentText = (text)}
@@ -32,7 +38,7 @@ export default function(props){
       <View style={{flexDirection: 'row'}}>
           <Button buttonText='Add' onClick={getCommentText} />
           <Button buttonText='Back' onClick={props.navigateToAddTodo} />
-        </View>
+      </View>
 
     </View>
   )
@@ -53,6 +59,5 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     width: 300,
     margin: 50,
-
   }
 });

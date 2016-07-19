@@ -19,11 +19,10 @@ class TODOList extends Component {
       };
     }
 
-  comment = (index,commentText) => {
+  comment = (index) => {
     this.props.navigator.push({
       component:commentScreen,
       indexNo : index,
-      commentText:commentText
     });
   }
 

@@ -12,7 +12,6 @@ class commentScreen extends Component {
   constructor(){
       super();
       this.state = {
-        index:9,
         dataSource: new ListView.DataSource({
           rowHasChanged: (row1, row2) => row1 !== row2,
         }),
@@ -30,17 +29,25 @@ class commentScreen extends Component {
     });
   }
 
-
+// .get('text')
   render(){
-    let commentObj = this.props.list.find( (commentObj) => {return commentObj.get('index') === (this.props.route.indexNo)});
+    let indexNo = this.props.route.indexNo
+    let todoText = this.props.todoList.get(indexNo)
+    console.log(todoText.get('text'));
+    console.log(todoText.get('status'));
+    
+    let commentObj = this.props.list.find( (commentObj) => {return commentObj.get('index') === (indexNo)});
     let list = commentObj.get('comments');
     const dataSource = this.state.dataSource.cloneWithRows(list.toJS())
     return(
       <CommentUI
-        heading = {this.props.route.commentText}
+        heading = {todoText}
+        indexNo = {indexNo}
         dataSource = {dataSource}
         navigateToAddTodo = {this.navigateToAddTodo}
         addComment = {this.addComment}
+        toggleTodo = {this.props.toggleTodo}
+
       />
     )
   }
@@ -48,7 +55,8 @@ class commentScreen extends Component {
 
 function mapStateToProps(state){
   return {
-    list: state.commentReducer.get('commentList')
+    list: state.commentReducer.get('commentList'),
+    todoList: state.todoReducer.get('todoList')
   }
 }
 
@@ -58,6 +66,12 @@ function mapDispatchToProps(dispatch){
       dispatch({
         type: 'ADD_COMMENT',
         text,
+        index
+      })
+    },
+    toggleTodo: (index) => {
+      dispatch({
+        type: 'TOGGLE_TODO',
         index
       })
     }
