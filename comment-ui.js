@@ -22,7 +22,7 @@ export default function(props){
      </View>
     }
 
-  function getCommentText(){
+  function dummyAddComment(){
     props.addComment(commentText)
   }
 
@@ -40,7 +40,7 @@ export default function(props){
         />
 
       <View style={{flexDirection: 'row'}}>
-          <Button buttonText='Add' onClick={getCommentText} />
+          <Button buttonText='Add' onClick={dummyAddComment} />
           <Button buttonText='Back' onClick={props.navigateToAddTodo} />
       </View>
 

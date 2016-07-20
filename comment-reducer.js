@@ -2,14 +2,7 @@
 import {Map,List,fromJS} from 'immutable';
 const initialState = fromJS({  //now its no more array , it changes to LIst
   commentList:[
-    {
-      index : 0,
-      comments : ['hello', 'test']
-    },
-    {
-      index : 1,
-      comments : ['hello 1', 'test 1']
-    }
+    
   ]
 });
 
@@ -24,13 +17,15 @@ export default function(state = initialState, action){
           let comments = existingCommentObj[1].get('comments').push(action.text);
           let updatedCommentObj = existingCommentObj[1].set('comments', comments);
           commentList = commentList.set(existingCommentObj[0], updatedCommentObj)
-        }
-        else{
+        }else{
           let newCommentObj = fromJS({index: action.index, comments: [action.text]});
           commentList = commentList.push(newCommentObj);
         }
         state = state.set('commentList', commentList)
-        //console.log(state.toJS())
+        //increment the comment count
+
+
+
         return state;
       }
 
@@ -43,6 +38,10 @@ export default function(state = initialState, action){
           let updatedCommentObj = commentList[1].set('comments', comments);
           totalCommentList = totalCommentList.set(commentList[0], updatedCommentObj)
           state = state.set('commentList', totalCommentList)
+          //decrement the comment count
+
+
+
 
           return state;
         }

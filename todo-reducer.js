@@ -10,11 +10,13 @@ const initialState = fromJS({  //now its no more array , it changes to LIst
   todoList: [
     {
       text: 'get redux state to component',
-      status: true
+      status: true,
+      commentCount:0
     },
     {
       text: 'toggle this one using action',
-      status: false
+      status: false,
+      commentCount:0
     }
   ]
 });
@@ -42,26 +44,23 @@ export default function(state = initialState, action){
       {
         let todo = state.get('todoList').get(action.index);
         todo = todo.set('status', !todo.get('status'));
-
         let newTodoList = state.get('todoList').set(action.index, todo);
-
         return state.set('todoList', newTodoList);
-
-
-        // let todo = state.todoList[action.index];
-        //
-        // let newTodo = {
-        //   text: todo.text,
-        //   status: !todo.status
-        // }
-        // let newTodoList = state.todoList.slice(0);
-        // newTodoList[action.index] = newTodo;
-        // state = Object.assign({...state}, {todoList: newTodoList});
-        // return state;
-
-
       }
-
+      case 'ADD_COMMENT':
+        {
+          let todo = state.get('todoList').get(action.index);
+          todo = todo.set('commentCount', todo.get('commentCount')+1);
+          let newTodoList = state.get('todoList').set(action.index, todo);
+          return state.set('todoList', newTodoList);
+        }
+        case 'DELETE_COMMENT':
+          {
+            let todo = state.get('todoList').get(action.todoIndex);
+            todo = todo.set('commentCount', todo.get('commentCount')-1);
+            let newTodoList = state.get('todoList').set(action.todoIndex, todo);
+            return state.set('todoList', newTodoList);
+          }
     default:
       return state
   }

@@ -1,12 +1,15 @@
 'use strict';
 
 import React, { Component } from 'react';
-import {toJS} from 'immutable';
+import {toJS, fromJS} from 'immutable';
 import {ListView} from 'react-native';
 import {connect} from 'react-redux';
 
 import TODOList from './todo-list';
-import CommentUI from './comment-ui'
+import CommentUI from './comment-ui';
+
+import {toggleTodo } from './todo-action';
+import {addComment,deleteComment} from './comment-action';
 
 class commentScreen extends Component {
   constructor(){
@@ -20,7 +23,9 @@ class commentScreen extends Component {
 
 
   addComment = (text) => {
-    this.props.addComment(text,this.props.route.indexNo);
+    if (text !== ""){
+      this.props.addComment(text,this.props.route.indexNo);
+    }
   }
 
   navigateToAddTodo = () => {
@@ -33,7 +38,7 @@ class commentScreen extends Component {
     let indexNo = this.props.route.indexNo
     let todoText = this.props.todoList.get(indexNo)
     let commentObj = this.props.list.find( (commentObj) => {return commentObj.get('index') === (indexNo)});
-    let list = commentObj.get('comments');
+    let list = commentObj ? commentObj.get('comments') : fromJS([]);
     const dataSource = this.state.dataSource.cloneWithRows(list.toJS())
     return(
       <CommentUI
@@ -59,24 +64,15 @@ function mapStateToProps(state){
 function mapDispatchToProps(dispatch){
   return {
     addComment: (text,index) => {
-      dispatch({
-        type: 'ADD_COMMENT',
-        text,
-        index
-      })
+      dispatch(addComment (text,index))
     },
+
     toggleTodo: (index) => {
-      dispatch({
-        type: 'TOGGLE_TODO',
-        index
-      })
+      dispatch(toggleTodo (index))
     },
+
     deleteComment:(commentindex,todoIndex) => {
-      dispatch({
-        type:'DELETE_COMMENT',
-        commentindex,
-        todoIndex,
-      })
+      dispatch(deleteComment(commentindex,todoIndex))
     }
   }
 }

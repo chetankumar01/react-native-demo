@@ -7,7 +7,9 @@ import {connect} from 'react-redux';
 
 import TodoListUI from './todo-list-ui';
 import AddTodo from './AddTodo';
-import commentScreen from './comment-screen'
+import commentScreen from './comment'
+import { toggleTodo } from './todo-action'
+
 class TODOList extends Component {
   constructor(){
 
@@ -41,7 +43,6 @@ class TODOList extends Component {
         toggleTodo = {this.props.toggleTodo}
         navigateToAddTodo = {this.navigateToAddTodo}
         comment = {this.comment}
-        commentList = {this.props.commentList}
         />
     )
   }
@@ -50,17 +51,13 @@ class TODOList extends Component {
 function mapStateToProps(state){
   return {
     todoList: state.todoReducer.get('todoList'),
-    commentList: state.commentReducer.get('commentList'),
   }
 }
 
 function mapDispatchToProps(dispatch){
   return {
     toggleTodo: (index) => {
-      dispatch({
-        type: 'TOGGLE_TODO',
-        index
-      })
+      dispatch( toggleTodo(index))
     }
   }
 }

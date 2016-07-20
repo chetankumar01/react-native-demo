@@ -1,5 +1,7 @@
 'use strict';
 import React from 'react';
+'use strict';
+
 import {View, ListView, StyleSheet} from 'react-native';
 
 import TextLabel from './text-label';
@@ -15,16 +17,16 @@ export default function(props){
   }
 
   function renderTodo(todo, sectionId, rowId){
-    let commentObj = props.commentList.find( (commentObj) => {return commentObj.get('index') === parseInt(rowId)});
-    let list = commentObj.get('comments');
-
+    // let commentObj = props.commentList.find( (commentObj) => {return commentObj.get('index') === parseInt(rowId)});
+    // let list = commentObj.get('comments');
+    // list.size
     return <View style={{  flexDirection: 'row'}}>
       <Checkbox text={todo.text} onClick={props.toggleTodo} isChecked={todo.status} index={rowId} />
       <Button
         buttonText='Comment' onClick={dummyComment.bind(this, rowId)}
         style={{  width:25, height:25,}}
          />
-         <TextLabel label= {list.size} color='yellow'/>
+         <TextLabel label= {todo.commentCount} color='yellow'/>
 
      </View>
   }
