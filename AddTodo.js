@@ -5,13 +5,13 @@ import TODOList from './todo-list';
 import {connect} from 'react-redux';
 import AddTodoUI from './add-todo-ui';
 
+import * as TodoActions from './todo-action';
+
 class AddTodo extends Component {
-
-
-render(){
+  render(){
     return(
       <AddTodoUI
-        addTodo = {this.addTodo}
+          addTodo = {this.addTodo}
       />
     )
   }
@@ -29,15 +29,4 @@ function mapStateToProps(state){
   }
 }
 
-function mapDispatchToProps(dispatch){
-  return {
-    addTodo: (text) => {
-        dispatch({
-        type: 'ADD_TODO',
-        text
-      })
-    }
-  }
-}
-
-export default connect(mapStateToProps,mapDispatchToProps)(AddTodo);
+export default connect(mapStateToProps, {...TodoActions})(AddTodo);

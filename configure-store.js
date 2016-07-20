@@ -1,8 +1,9 @@
 'use strict';
 
-import {createStore, combineReducers} from 'redux';
+import {createStore, combineReducers, applyMiddleware} from 'redux';
 import todoReducer from './todo-reducer';
 import commentReducer from './comment-reducer';
+import thunk from 'redux-thunk';
 
 export default function configureStore() {
 
@@ -11,7 +12,8 @@ export default function configureStore() {
   });
 
   const store = createStore(
-    rootReducer
+    rootReducer,
+    applyMiddleware(thunk)
   );
 
   return store;

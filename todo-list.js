@@ -8,11 +8,10 @@ import {connect} from 'react-redux';
 import TodoListUI from './todo-list-ui';
 import AddTodo from './AddTodo';
 import commentScreen from './comment'
-import { toggleTodo } from './todo-action'
+import * as TodoActions from './todo-action'
 
 class TODOList extends Component {
   constructor(){
-
       super();
       this.state = {
         dataSource: new ListView.DataSource({
@@ -54,12 +53,4 @@ function mapStateToProps(state){
   }
 }
 
-function mapDispatchToProps(dispatch){
-  return {
-    toggleTodo: (index) => {
-      dispatch( toggleTodo(index))
-    }
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(TODOList);
+export default connect(mapStateToProps, {...TodoActions})(TODOList);

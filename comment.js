@@ -8,8 +8,8 @@ import {connect} from 'react-redux';
 import TODOList from './todo-list';
 import CommentUI from './comment-ui';
 
-import {toggleTodo } from './todo-action';
-import {addComment,deleteComment} from './comment-action';
+import * as TodoActions from './todo-action';
+import * as CommentActions from './comment-action';
 
 class commentScreen extends Component {
   constructor(){
@@ -35,6 +35,7 @@ class commentScreen extends Component {
   }
 
   render(){
+    console.log(this.props);
     let indexNo = this.props.route.indexNo
     let todoText = this.props.todoList.get(indexNo)
     let commentObj = this.props.list.find( (commentObj) => {return commentObj.get('index') === (indexNo)});
@@ -61,20 +62,4 @@ function mapStateToProps(state){
   }
 }
 
-function mapDispatchToProps(dispatch){
-  return {
-    addComment: (text,index) => {
-      dispatch(addComment (text,index))
-    },
-
-    toggleTodo: (index) => {
-      dispatch(toggleTodo (index))
-    },
-
-    deleteComment:(commentindex,todoIndex) => {
-      dispatch(deleteComment(commentindex,todoIndex))
-    }
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(commentScreen);
+export default connect(mapStateToProps, { ...TodoActions, ...CommentActions })(commentScreen);
