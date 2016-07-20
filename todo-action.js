@@ -11,6 +11,16 @@ export  function toggleTodo(index){
 }
 
 export  function addTodo(text){
+  return function(dispatch, getState){
+    if(getState().todoReducer.get('todoList').size < 5){
+      //fire event here
+      return dispatch(fireAddTodoAction(text));
+    }
+  }
+}
+
+
+function fireAddTodoAction(text){
   return{
     type: ADD_TODO,
     text

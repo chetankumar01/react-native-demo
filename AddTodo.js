@@ -25,8 +25,7 @@ class AddTodo extends Component {
 
 
 function mapStateToProps(state){
-  return {
-  }
+  return {}
 }
 
 export default connect(mapStateToProps, {...TodoActions})(AddTodo);
